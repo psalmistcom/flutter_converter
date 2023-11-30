@@ -54,7 +54,7 @@ class _CurrencyConverterMaterialPage
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                result.toString(),
+                "₦ ${result != 0 ? result.toStringAsFixed(2) : result.toStringAsFixed(0)}",
                 style: const TextStyle(
                   color: Color.fromARGB(255, 200, 255, 204),
                   // backgroundColor: Color.fromRGBO(20, 0, 0, 1),
@@ -131,7 +131,11 @@ class _CurrencyConverterMaterialPage
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextButton.icon(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      result = double.parse("0");
+                    });
+                  },
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,

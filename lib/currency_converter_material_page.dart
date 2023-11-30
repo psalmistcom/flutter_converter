@@ -1,16 +1,24 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CurrencyConverterMaterialPage extends StatelessWidget {
+class CurrencyConverterMaterialPage extends StatefulWidget {
   const CurrencyConverterMaterialPage({super.key});
 
+  @override
+  State<CurrencyConverterMaterialPage> createState() =>
+      _CurrencyConverterMaterialPage();
+}
+
+class _CurrencyConverterMaterialPage
+    extends State<CurrencyConverterMaterialPage> {
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     const customColor = Color(0xFF2C3C44);
     const customColorBG = Colors.blueGrey;
     const customeBorder = OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(50.0),
+        Radius.circular(10.0),
       ),
       borderSide: BorderSide(
         // color: customColor,
@@ -21,6 +29,18 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: customColorBG,
+      appBar: AppBar(
+        backgroundColor: customColorBG,
+        centerTitle: true,
+        elevation: 0,
+        title: const Text(
+          "Currency Converter",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Center(
@@ -36,13 +56,14 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
                   fontSize: 45,
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.all(10),
-                child: const TextField(
-                  keyboardType: TextInputType.numberWithOptions(
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: TextField(
+                  controller: textEditingController,
+                  keyboardType: const TextInputType.numberWithOptions(
                     decimal: true,
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     // border: customeBorder,
                     enabledBorder: customeBorder,
                     hintText: 'Enter amount in USD',
@@ -55,28 +76,47 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
                     fillColor: Colors.white,
                     focusedBorder: customeBorder,
                   ),
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                   ),
                 ),
               ),
-              TextButton(
-                onPressed: () {
-                  if (kDebugMode) {
-                    print("you pressed me");
-                  }
-                },
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.black),
-                  minimumSize: MaterialStatePropertyAll(
-                    Size(300, 55),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    result = (double.parse(textEditingController.text) * 991);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    elevation: 10,
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                    minimumSize: const Size(double.infinity, 55),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
                   ),
-                ),
-                child: const Text(
-                  "Convert",
-                  style: TextStyle(
-                    color: Colors.white,
+                  // style: ButtonStyle(
+                  //   elevation: const MaterialStatePropertyAll(5),
+                  //   backgroundColor:
+                  //       const MaterialStatePropertyAll(Colors.black),
+                  //   foregroundColor:
+                  //       const MaterialStatePropertyAll(Colors.white),
+                  //   minimumSize: const MaterialStatePropertyAll(
+                  //     Size(double.infinity, 55),
+                  //   ),
+                  //   shape: MaterialStatePropertyAll(
+                  //     RoundedRectangleBorder(
+                  //       borderRadius: BorderRadius.circular(5.0),
+                  //     ),
+                  //   ),
+                  // ),
+                  child: const Text(
+                    "Convert",
                   ),
+                  // child: const Icon(
+                  //   Icons.ads_click,
+                  // ),
                 ),
               )
             ],

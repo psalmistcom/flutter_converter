@@ -130,23 +130,24 @@ class _CurrencyConverterMaterialPage
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: TextButton.icon(
+                child: ElevatedButton.icon(
                   onPressed: () {
                     setState(() {
                       result = double.parse("0");
                     });
                   },
-                  style: TextButton.styleFrom(
+                  style: ElevatedButton.styleFrom(
+                    elevation: 2,
                     backgroundColor: Colors.red,
                     foregroundColor: Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
                   ),
+                  label: const Text("Reset"),
                   icon: const Icon(
                     Icons.restore_sharp,
                   ),
-                  label: const Text("Reset"),
                 ),
               ),
             ],

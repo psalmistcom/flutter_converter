@@ -8,11 +8,16 @@ class CurrencyConverterMaterialPage extends StatefulWidget {
       _CurrencyConverterMaterialPage();
 }
 
-double result = 0;
-final TextEditingController textEditingController = TextEditingController();
-
 class _CurrencyConverterMaterialPage
     extends State<CurrencyConverterMaterialPage> {
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
+
+  void convert() {
+    result = (double.parse(textEditingController.text) * 1001);
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
@@ -90,12 +95,7 @@ class _CurrencyConverterMaterialPage
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      result =
-                          (double.parse(textEditingController.text) * 1000);
-                    });
-                  },
+                  onPressed: convert,
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
                     backgroundColor: Colors.black,

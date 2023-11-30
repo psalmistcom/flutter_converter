@@ -8,10 +8,16 @@ class CurrencyConverterMaterialPage extends StatefulWidget {
       _CurrencyConverterMaterialPage();
 }
 
+double result = 0;
+final TextEditingController textEditingController = TextEditingController();
+
 class _CurrencyConverterMaterialPage
     extends State<CurrencyConverterMaterialPage> {
-  double result = 0;
-  final TextEditingController textEditingController = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     const customColor = Color(0xFF2C3C44);
@@ -47,9 +53,9 @@ class _CurrencyConverterMaterialPage
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                '0',
-                style: TextStyle(
+              Text(
+                result.toString(),
+                style: const TextStyle(
                   color: Color.fromARGB(255, 200, 255, 204),
                   // backgroundColor: Color.fromRGBO(20, 0, 0, 1),
                   fontWeight: FontWeight.bold,
@@ -85,7 +91,10 @@ class _CurrencyConverterMaterialPage
                 padding: const EdgeInsets.all(10.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    result = (double.parse(textEditingController.text) * 991);
+                    setState(() {
+                      result =
+                          (double.parse(textEditingController.text) * 1000);
+                    });
                   },
                   style: ElevatedButton.styleFrom(
                     elevation: 10,
@@ -118,7 +127,24 @@ class _CurrencyConverterMaterialPage
                   //   Icons.ads_click,
                   // ),
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: TextButton.icon(
+                  onPressed: () {},
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  icon: const Icon(
+                    Icons.restore_sharp,
+                  ),
+                  label: const Text("Reset"),
+                ),
+              ),
             ],
           ),
         ),

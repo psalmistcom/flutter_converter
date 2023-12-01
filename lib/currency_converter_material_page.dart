@@ -11,16 +11,25 @@ class CurrencyConverterMaterialPage extends StatefulWidget {
 class _CurrencyConverterMaterialPage
     extends State<CurrencyConverterMaterialPage> {
   double result = 0;
+  double inputValue = 0;
   final TextEditingController textEditingController = TextEditingController();
 
   void convert() {
+    inputValue = (double.parse(textEditingController.text));
     result = (double.parse(textEditingController.text) * 1001);
+    textEditingController.clear();
     setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    textEditingController.dispose();
+    super.dispose();
   }
 
   @override
@@ -59,9 +68,19 @@ class _CurrencyConverterMaterialPage
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
+                "Input Value: ${inputValue != 0 ? inputValue.toStringAsFixed(2) : "0"}",
+                style: const TextStyle(
+                  color: Colors.white54,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
                 "₦ ${result != 0 ? result.toStringAsFixed(2) : result.toStringAsFixed(0)}",
                 style: const TextStyle(
-                  color: Color.fromARGB(255, 200, 255, 204),
+                  color: Color.fromARGB(255, 241, 253, 255),
                   // backgroundColor: Color.fromRGBO(20, 0, 0, 1),
                   fontWeight: FontWeight.bold,
                   fontSize: 45,
@@ -134,6 +153,7 @@ class _CurrencyConverterMaterialPage
                   onPressed: () {
                     setState(() {
                       result = double.parse("0");
+                      // inputValue = double.parse("");
                     });
                   },
                   style: ElevatedButton.styleFrom(
